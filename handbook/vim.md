@@ -410,6 +410,50 @@ delm[a-zA-Z] 删除指定的标记
 	> [powerline-fonts](https://github.com/Lokaltog/powerline-fonts)
 	> 
 	> [aireline安装和配置](http://blog.razrlele.com/vim/)
+	> [ControlP 中文手册](http://blog.codepiano.com/pages/ctrlp-cn.dark.html)
+- **YouCompleteMe → 强大的自动完成**
+	<pre>
+	这个安装配置看着官方文档就是头都大了,看着就感觉高大上,看着那么繁复的安装配置恨不得不用了。
+	安装过程：以win7x64为例，喜欢折腾受虐的下面略过吧
+		看看下面这步骤，前5步要全都自己编译安装，而且win中的各种坑...真的有想撞墙的冲动。
+	    	1.python2.7+是必须要安装好的，并且在系统环境变量PATH中加入python.exe所在路径
+		2.需要替换libpython27.a，这步很重要。要不后面make的时候各种坑，我被折磨了好久。
+		3.MinGW-w64安装，并设置环境变量,可以复制mingw32-make.exe，然后粘帖改名为make.exe
+		  下载地址看下面的链接
+		4.LLVM-clang安装,安装好以后也在环境变量设置下吧。
+		5.CMake安装
+		6.Vim-64位安装
+		7.安装YCM这个没撒说的了，用VUndle或者Pathogen,看个人喜好了。
+		  git clone https://github.com/Valloric/YouCompleteMe .
+		  git submodule update --init --recursive
+		8.替换interlocked.hpp文件，从下面路径下载
+		9.修改YouCompleteMe\third_party\ycmd\cpp\CMakeLists.txt
+		  在文件最后增加下面的语句
+		  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -include cmath")
+		  add_definitions(-DBOOST_PYTHON_SOURCE)
+		  add_definitions(-DBOOST_THREAD_BUILD_DLL)
+		  add_definitions(-DMS_WIN64)
+		9.然后就是编译了。。。。
+		  cmake -G "MinGW Makefiles" -DPATH_TO_LLVM_ROOT=D:\Program\DevEnv\MinGW-llvm -DPYTHON_INCLUDE_DIR=D:\Program\DevEnv\Python27\include -DPYTHON_LIBRARY=D:\Program\DevEnv\Python27\libs\python27.lib . D:\tmp\YouCompleteMe\third_party\ycmd\cpp
+		  make ycm_support_libs
+		  遇到了各种坑...我所遇到的问题
+		  cmake的时候系统环境变量里由于有cygwin的设置,sh报错。。
+		  cmake的时候系统环境变量里由于有git的设置，sh报错。。。 就这两个问题就折腾了好久。
+		  由于Mingw64以前安装过是4.9.1各种失败。。。又下载了3中的包重新替换mingw64的环境
+		  出现错误architecture of input file `C:\Python27\libs\libpython27.a(du ks00143.o)' is incompatible with i386:x86-64 output...，按照官方提示用了2中的包替换libpython27.a
+		  又出现undefined reference to `__imp__Py_NoneStruct,我的python是2.7.7，去官方下了个2.7.8安装了，然后又操作了一次2，本机最后一次操作。还是错误。。。
+		  最后试了一次删除cmake中-DPYTHON_INCLUDE_DIR和-DPYTHON_LIBRARY居然成功了。。。。
+		  --虚拟机中编译成功了。我就用虚拟机中的编译的包吧
+		  
+	</pre>
+	[Python2.7.8-w64](https://www.python.org/ftp/python/2.7.8/python-2.7.8.amd64.msi)</br>
+	[libpython27.a](http://www.lfd.uci.edu/%7Egohlke/pythonlibs/#libpython)</br>
+	[MinGW-w64/4.8.1/x64/POSIX/SJLJ](http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.8.1/threads-posix/sjlj/)</br>
+	[LLVM-clang-w64](https://bitbucket.org/Haroogan/llvm-for-windows/downloads/llvm-3.4-mingw-w64-4.8.1-x64-posix-sjlj.zip)</br>
+	[VIM-w64(YCM作者推荐)](https://bitbucket.org/Haroogan/vim-for-windows/downloads/vim-7.4.417-python-2.7-python-3.4-ruby-2.0.0-lua-5.2-perl-5.18-windows-x64.zip)</br>
+	[VIM-w64(我个人推荐到这里下)](http://tuxproject.de/projects/vim/complete-x64.7z)</br>
+	[interlocked.hpp](https://github.com/Reikion/YouCompleteMe/blob/master/cpp/BoostParts/boost/detail/interlocked.hpp)</br>
+	[官方编译指导Instructions for 64-bit using MinGW64 (clang)](https://github.com/Valloric/YouCompleteMe/wiki/Windows-Installation-Guide#instructions-for-64-bit-using-mingw64-clang)
 - **py-mode** 
 - **jedi** 
 - **mru** 
