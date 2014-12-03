@@ -444,8 +444,10 @@ delm[a-zA-Z] 删除指定的标记
 		  又出现undefined reference to `__imp__Py_NoneStruct,我的python是2.7.7，去官方下了个2.7.8安装了，然后又操作了一次2，本机最后一次操作。还是错误。。。
 		  最后试了一次删除cmake中-DPYTHON_INCLUDE_DIR和-DPYTHON_LIBRARY居然成功了。。。。
 		  --虚拟机中编译成功了。我就用虚拟机中的编译的包吧
-		  
 	</pre>
+	
+	**失败:搞半天官方不支持win...编译出来的东西在win用不了。</br>
+	YCM libraries found in old YouCompleteMe/python location; please  RECOMPILE YCM.**</br>
 	[Python2.7.8-w64](https://www.python.org/ftp/python/2.7.8/python-2.7.8.amd64.msi)</br>
 	[libpython27.a](http://www.lfd.uci.edu/%7Egohlke/pythonlibs/#libpython)</br>
 	[MinGW-w64/4.8.1/x64/POSIX/SJLJ](http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.8.1/threads-posix/sjlj/)</br>
@@ -453,7 +455,8 @@ delm[a-zA-Z] 删除指定的标记
 	[VIM-w64(YCM作者推荐)](https://bitbucket.org/Haroogan/vim-for-windows/downloads/vim-7.4.417-python-2.7-python-3.4-ruby-2.0.0-lua-5.2-perl-5.18-windows-x64.zip)</br>
 	[VIM-w64(我个人推荐到这里下)](http://tuxproject.de/projects/vim/complete-x64.7z)</br>
 	[interlocked.hpp](https://github.com/Reikion/YouCompleteMe/blob/master/cpp/BoostParts/boost/detail/interlocked.hpp)</br>
-	[官方编译指导Instructions for 64-bit using MinGW64 (clang)](https://github.com/Valloric/YouCompleteMe/wiki/Windows-Installation-Guide#instructions-for-64-bit-using-mingw64-clang)
+	[官方编译指导Instructions for 64-bit using MinGW64 (clang)](https://github.com/Valloric/YouCompleteMe/wiki/Windows-Installation-Guide#instructions-for-64-bit-using-mingw64-clang)</br>
+	**[知乎如何在 Windows 下使用 Vim 的 YouCompleteMe 插件？](http://www.zhihu.com/question/25437050)**
 - **py-mode** 
 - **jedi** 
 - **mru** 
