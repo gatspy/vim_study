@@ -198,20 +198,21 @@ delm[a-zA-Z] 删除指定的标记
 - buffer是啥→每个bufffer都对应着一个相应的文件，打开一个文件就有一个Buffer， 也存在不对应文件的buffer
 - buffer识别→每个buffer有自己的编号和名字，名字==文件的名字
 - buffer创建→创建一个buffer,可以vim a.txt或者:e b.txt
-- buffer列表→命令模式输入:ls 或 :buffers 或 :files
-- buffer加入→用badd命令，此命令会读取文件，并加入bufferlist
-- buffer删除→命令模式:bdelete 编号或名字。bdelete a.txt
-- buffer移除→bunload此命令会移除当前的buffer，并从内存删除，但是不会从bufferlist中移除
-- buffer读取→当前窗口读取buffer 和 新窗口读取buffer
-	<pre>当前窗口 → ctrl-^，如果当前buffer修改没有保存，就打不开你需要的buffer
+- buffer列表→命令模式输入:ls[!] 或 :buffers[!] 或 :files[!] !将显示unlisted buffer
+- buffer加入→用bad[d][lnum]fname 命令，此命令会读取文件，并加入bufferlist
+- buffer删除→命令模式:[N,M]bd[elete] 编号或名字。bdelete a.txt
+- buffer清除→[N,M]bw[ipeout][!]序号或名字，彻底删除buffer和与之相关的一切，mark、setting等，不到万不得已不要用
+- buffer移除→bun[load]此命令会移除当前的buffer，并从内存删除，但是不会从bufferlist中移除
+- buffer编辑→当前窗口读取buffer 和 新窗口读取buffer
+	<pre>当前窗口 → :[n]b[uffer][!]序号或名字 或 n ctrl-^，如果当前buffer修改没有保存，就打不开你需要的buffer
 	新建窗口 → sbuffer c.txt,会新建一个窗口读取需要的buffer
 	</pre>
 - buffer跳转→b会在当前窗口加载buffer，sb会在新窗口加载buffer
-	<pre>1.跳到第一个 → bfirst 或 sbfirst 还可以用 brewind 或 sbrewind
-	2.跳到下一个 → bnext 或 sbnext
+	<pre>1.跳到第一个 → bf[irst] 或 sbf[irst] 还可以用 br[ewind] 或 sbr[ewind]
+	2.跳到下一个 → bn[ext] 或 sbn[ext]
 	3.跳到前一个 → bNext 或 sbNext，还可以用 bprevious 或 sbprevious
-	3.跳最后一个 → blast 或 sblast
-	4.跳到修改的 → bmodified或:sbmodified
+	3.跳最后一个 → bl[ast] 或 sbl[ast]
+	4.跳到修改的 → bm[odified]或:sbm[odified]
 	</pre>
     > [Vim Buffer](http://blog.sina.com.cn/s/blog_61dfab6b0100qvgb.html "Buffer")
 - 常用插件
@@ -225,13 +226,15 @@ delm[a-zA-Z] 删除指定的标记
 ----------------------------------------------
 - vim是多窗口的，一个页中可以有很多窗口，每个窗口可以加载不同的buff
 - 启用多窗口编辑
-	<pre>1.vim -on a.txt b.txt 显示水平分割的两个窗口
+	<pre>
+	1.vim -on a.txt b.txt 显示水平分割的两个窗口
 	2.vim -On a.txt b.txt 显示垂直分割的两个窗口
 	3.上面的n数字，表示预分配窗口
 	</pre>
 - 窗口分割 :[n] split(vsplit)  [++opt]  [+cmd]  [file]
-	<pre>n   为vim指定在新窗口中显示的行数，且新窗口的大小刚好容纳该行数，新窗口位于画面顶端
-	opt  传递vim选项信息给新的窗口会话（请注意，它的前面必须加上两个加号）
+	<pre>
+n为vim指定在新窗口中显示的行数，且新窗口的大小刚好容纳该行数，新窗口位于画面顶端
+opt  传递vim选项信息给新的窗口会话（请注意，它的前面必须加上两个加号）
 	cmd 传入欲在新窗口中执行的命令（请注意，它的前面必须加上一个加号）
 	file  指定在新窗口中编辑的文件
 	：sview  filename  以只读的方式水平分割打开一个新窗口
